@@ -13,19 +13,52 @@ use Smalot\PdfParser\Parser;
 class DocumentParserService
 {
     /**
+     * Separator placed between pages when they are joined into one text
+     * (the same one the PDF parser itself uses).
+     */
+    public const PAGE_SEPARATOR = "\n\n";
+
+    /**
      * Extract the full plain-text content of a PDF file.
      */
     public function extractText(string $absolutePath): string
     {
+        return trim(implode(self::PAGE_SEPARATOR, $this->extractPages($absolutePath)));
+    }
+
+    /**
+     * Extract the text of each page, keyed by its 1-based PDF page number.
+     * Pages without any text (e.g. full-page images) are left out.
+     *
+     * Joining these with PAGE_SEPARATOR gives exactly the same text as
+     * extractText(), so chunks (and their cached embeddings) don't change
+     * when page numbers are tracked.
+     *
+     * @return array<int, string>
+     */
+    public function extractPages(string $absolutePath): array
+    {
         $parser = new Parser;
         $pdf = $parser->parseFile($absolutePath);
 
-        $text = $pdf->getText();
+        $pages = [];
 
-        // Normalise excessive blank lines/whitespace left behind by the parser.
-        $text = preg_replace('/[ \t]+/', ' ', $text);
-        $text = preg_replace('/\n{3,}/', "\n\n", $text);
+        foreach ($pdf->getPages() as $index => $page) {
+            $text = trim($page->getText());
 
-        return trim($text);
+            if ($text === '') {
+                continue;
+            }
+
+            // Normalise excessive blank lines/whitespace left behind by the parser.
+            // Some PDFs use non-breaking spaces (U+00A0) between words; treat
+            // them as normal spaces so chunking can split on word boundaries.
+            $text = preg_replace('/[ \t\x{00A0}]+/u', ' ', $text);
+            $text = preg_replace('/\n{3,}/', "\n\n", $text);
+
+            $pages[$index + 1] = $text;
+        }
+
+        return $pages;
     }
 }

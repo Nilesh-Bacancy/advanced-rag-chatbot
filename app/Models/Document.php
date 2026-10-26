@@ -18,11 +18,22 @@ class Document extends Model
 
     public const STATUS_FAILED = 'failed';
 
+    /** Mostly running text (e.g. an annual report): sentence-aware chunking. */
+    public const PROFILE_NARRATIVE = 'narrative';
+
+    /** Long report with chapters and sections: section-aware retrieval. */
+    public const PROFILE_STRUCTURED = 'structured';
+
+    /** Short document whose facts sit in charts, tables and footnotes: vision extraction. */
+    public const PROFILE_VISUAL = 'visual';
+
     protected $fillable = [
         'name',
         'original_filename',
         'file_path',
         'status',
+        'profile',
+        'page_count',
         'error_message',
     ];
 

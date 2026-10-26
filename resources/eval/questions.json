@@ -1,0 +1,138 @@
+[
+    {
+        "id": "gpo-1",
+        "document": "GPO-Anual-report",
+        "kind": "sample",
+        "question": "How many depository libraries did GPO staff visit in FY 2018?",
+        "expected": "166 depository libraries (in 25 states).",
+        "source_pages": [5, 21]
+    },
+    {
+        "id": "gpo-2",
+        "document": "GPO-Anual-report",
+        "kind": "sample",
+        "question": "What new digital system replaced FDsys, and when was it fully deployed?",
+        "expected": "govinfo replaced FDsys; FDsys was scheduled to be completely retired and replaced by govinfo in December 2018.",
+        "source_pages": [10, 22]
+    },
+    {
+        "id": "gpo-3",
+        "document": "GPO-Anual-report",
+        "kind": "sample",
+        "question": "How much did GPO procure in printing and information products in FY 2018 on behalf of federal agencies?",
+        "expected": "More than $375 million (about $375.7 million), through more than 84,000 orders.",
+        "source_pages": [5]
+    },
+    {
+        "id": "gpo-x1",
+        "document": "GPO-Anual-report",
+        "kind": "unanswerable",
+        "question": "What was GPO's total employee headcount in FY 2025?",
+        "expected": "Not in the document (it is the FY 2018 annual report); the system should say it doesn't have this information instead of giving a number.",
+        "source_pages": []
+    },
+    {
+        "id": "gep-1",
+        "document": "GEP-Jun-2026",
+        "kind": "sample",
+        "question": "What is the growth outlook for South Asia in this report?",
+        "expected": "Growth in South Asia (SAR) is expected to soften to 6.3 percent in 2026, mainly due to the Middle East conflict (higher energy prices, reduced oil and gas supplies, disrupted remittances and tourism); the forecast was marginally upgraded since January on robust domestic demand and stronger exports.",
+        "source_pages": [96, 97]
+    },
+    {
+        "id": "gep-2",
+        "document": "GEP-Jun-2026",
+        "kind": "sample",
+        "question": "What does Chapter 3 say about sovereign debt in developing economies?",
+        "expected": "Rising government debt in EMDEs (from under 40 percent of GDP in 2010 to over 70 percent) raises interest rates and debt-service costs; higher debt is associated with higher sovereign spreads and domestic yields, non-linearly (about 110 and 30 basis points since 2010); effects are larger for countries with weak fundamentals; it calls for stronger fiscal positions (revenue mobilization, efficient spending, debt management).",
+        "source_pages": [107, 109, 110]
+    },
+    {
+        "id": "gep-3",
+        "document": "GEP-Jun-2026",
+        "kind": "sample",
+        "question": "According to the executive summary, what are the main risks to the global outlook?",
+        "expected": "Risks are skewed to the downside: renewed escalation of hostilities or prolonged commodity disruptions (higher prices, inflation, food insecurity, financial stress, lower growth; in a severe scenario global growth could fall to 1.3 percent in 2026), persistent trade policy uncertainty, geopolitical strains and weather-related shocks. Upside: broader AI investment and adoption.",
+        "source_pages": [19]
+    },
+    {
+        "id": "gep-h1",
+        "document": "GEP-Jun-2026",
+        "kind": "hard",
+        "question": "How does the 2026 growth forecast for East Asia and Pacific compare with Sub-Saharan Africa?",
+        "expected": "East Asia and Pacific: growth projected to moderate to 4.2 percent in 2026 (from 5 percent in 2025). Sub-Saharan Africa: forecast to edge down to 4 percent in 2026, then recover to 4.4 percent on average in 2027-28. The two regions' figures must not be mixed up.",
+        "source_pages": [81, 99]
+    },
+    {
+        "id": "gep-h2",
+        "document": "GEP-Jun-2026",
+        "kind": "hard",
+        "question": "What is the 2026 growth forecast for Latin America and the Caribbean?",
+        "expected": "Growth in Latin America and the Caribbean (LAC) is projected to slow to 2.2 percent in 2026.",
+        "source_pages": [88]
+    },
+    {
+        "id": "gep-x1",
+        "document": "GEP-Jun-2026",
+        "kind": "unanswerable",
+        "question": "What is the report's forecast for the price of Bitcoin in 2027?",
+        "expected": "Not in the document; the system should say the report doesn't cover this instead of inventing a forecast.",
+        "source_pages": []
+    },
+    {
+        "id": "imac-1",
+        "document": "iMac_PER_Oct2024",
+        "kind": "sample",
+        "question": "How much less energy does iMac use compared to the ENERGY STAR requirement?",
+        "expected": "58 percent less energy than the ENERGY STAR requirement.",
+        "source_pages": [7]
+    },
+    {
+        "id": "imac-2",
+        "document": "iMac_PER_Oct2024",
+        "kind": "sample",
+        "question": "What is the total carbon footprint of the iMac, and how much of that comes from product use versus manufacturing?",
+        "expected": "346 kg CO2e for iMac (two ports) 256GB; production (manufacturing) is 50 percent and product use 45 percent. (The four-port 512GB configuration is 391 kg CO2e.)",
+        "source_pages": [2, 10]
+    },
+    {
+        "id": "imac-3",
+        "document": "iMac_PER_Oct2024",
+        "kind": "sample",
+        "question": "What material is the iMac stand made from, and what percentage of it is recycled?",
+        "expected": "Aluminum; 100 percent recycled aluminum.",
+        "source_pages": [1, 2]
+    },
+    {
+        "id": "imac-h1",
+        "document": "iMac_PER_Oct2024",
+        "kind": "hard",
+        "question": "According to the carbon emissions chart, what were the iMac's baseline emissions and how much were they reduced by?",
+        "expected": "Baseline emissions of 445 kg CO2e, reduced by 99 kg, giving 346 kg CO2e (a reduction of more than 20 percent).",
+        "source_pages": [2]
+    },
+    {
+        "id": "imac-h2",
+        "document": "iMac_PER_Oct2024",
+        "kind": "hard",
+        "question": "What is the iMac's power consumption in sleep mode at 115V?",
+        "expected": "0.57W (from the power consumption table; 0.56W at 100V and 0.59W at 230V).",
+        "source_pages": [12]
+    },
+    {
+        "id": "imac-h3",
+        "document": "iMac_PER_Oct2024",
+        "kind": "hard",
+        "question": "The report claims emissions were reduced by more than 20 percent. What is that reduction measured against?",
+        "expected": "Against a product-specific business-as-usual scenario modeled by Apple. Required key facts (from footnote 7), all of which must be present: (1) no use of clean electricity for manufacturing or product use beyond what is on the modeled grid, (2) Apple's 2015 carbon intensity of key materials, (3) Apple's average mix of transportation modes. An answer that only says 'business-as-usual scenario' without these assumptions fails.",
+        "source_pages": [2, 11]
+    },
+    {
+        "id": "imac-x1",
+        "document": "iMac_PER_Oct2024",
+        "kind": "unanswerable",
+        "question": "What is the retail price of the iMac in India?",
+        "expected": "Not in the document; the system should say the report doesn't cover pricing instead of giving a price.",
+        "source_pages": []
+    }
+]

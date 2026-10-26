@@ -10,6 +10,10 @@ class DocumentChunk extends Model
     protected $fillable = [
         'document_id',
         'chunk_index',
+        'page_start',
+        'page_end',
+        'section_path',
+        'chunk_type',
         'content',
         'embedding',
     ];
@@ -22,6 +26,20 @@ class DocumentChunk extends Model
         return [
             'embedding' => 'array',
         ];
+    }
+
+    /**
+     * Human-readable page reference for citations, e.g. "p. 5" or "pp. 5-6".
+     */
+    public function pageLabel(): ?string
+    {
+        if ($this->page_start === null) {
+            return null;
+        }
+
+        return $this->page_end !== null && $this->page_end !== $this->page_start
+            ? "pp. {$this->page_start}-{$this->page_end}"
+            : "p. {$this->page_start}";
     }
 
     /**

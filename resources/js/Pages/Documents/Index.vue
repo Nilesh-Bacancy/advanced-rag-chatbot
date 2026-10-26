@@ -51,6 +51,28 @@ function statusLabel(status) {
     }[status] ?? status;
 }
 
+// How the document was processed (see IngestionService::detectProfile()).
+function profileLabel(doc) {
+    const label = {
+        narrative: 'Narrative text',
+        structured: 'Long, structured',
+        visual: 'Charts & tables',
+    }[doc.profile];
+
+    return label;
+}
+
+// Chunks only exist once processing has finished.
+function chunkLabel(doc) {
+    if (doc.status !== 'completed') {
+        return '—';
+    }
+
+    return doc.visual_chunks_count
+        ? `${doc.chunks_count} (${doc.visual_chunks_count} from charts/tables)`
+        : doc.chunks_count;
+}
+
 function remove(doc) {
     if (!confirm(`Remove "${doc.original_filename}"? This also deletes its chat history.`)) {
         return;
@@ -61,7 +83,7 @@ function remove(doc) {
 </script>
 
 <template>
-    <div class="mx-auto max-w-3xl p-6">
+    <div class="mx-auto max-w-4xl p-6">
         <h1 class="text-2xl font-semibold text-gray-900">Document Chatbot</h1>
         <p class="mt-1 text-sm text-gray-500">
             Upload a PDF, wait for it to finish processing, then open the chat to ask questions about it.
@@ -87,14 +109,21 @@ function remove(doc) {
         <table class="mt-8 w-full text-left text-sm">
             <thead>
                 <tr class="border-b border-gray-200 text-gray-500">
-                    <th class="py-2 font-medium">File</th>
+                    <th class="py-2 pr-6 font-medium">File</th>
+                    <th class="py-2 pr-6 font-medium">Pages</th>
+                    <th class="py-2 pr-6 font-medium">Chunks</th>
                     <th class="py-2 font-medium">Status</th>
                     <th class="py-2 font-medium"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="doc in documents" :key="doc.id" class="border-b border-gray-100">
-                    <td class="py-3 text-gray-900">{{ doc.original_filename }}</td>
+                    <td class="py-3 pr-6 text-gray-900">
+                        {{ doc.original_filename }}
+                        <span v-if="profileLabel(doc)" class="block text-xs text-gray-500">{{ profileLabel(doc) }}</span>
+                    </td>
+                    <td class="py-3 pr-6 text-gray-700 whitespace-nowrap">{{ doc.page_count ?? '—' }}</td>
+                    <td class="py-3 pr-6 text-gray-700 whitespace-nowrap">{{ chunkLabel(doc) }}</td>
                     <td class="py-3">
                         <span
                             class="rounded-full px-2 py-0.5 text-xs font-medium"
@@ -128,7 +157,7 @@ function remove(doc) {
                     </td>
                 </tr>
                 <tr v-if="documents.length === 0">
-                    <td colspan="3" class="py-6 text-center text-gray-400">No documents uploaded yet.</td>
+                    <td colspan="5" class="py-6 text-center text-gray-400">No documents uploaded yet.</td>
                 </tr>
             </tbody>
         </table>

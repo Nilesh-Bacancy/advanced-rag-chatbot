@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Document;
 use App\Models\DocumentChunk;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 /**
@@ -27,12 +28,17 @@ class VectorSearchService
     /**
      * Find the top-N chunks of a document most relevant to a question embedding.
      *
+     * An optional $scope callback narrows the chunks searched, e.g. to the
+     * sections a question asks about.
+     *
      * @param  array<int, float>  $questionEmbedding
+     * @param  (callable(Builder): mixed)|null  $scope
      * @return Collection<int, DocumentChunk>
      */
-    public function search(Document $document, array $questionEmbedding, int $topN = 5): Collection
+    public function search(Document $document, array $questionEmbedding, int $topN = 5, ?callable $scope = null): Collection
     {
         return $document->chunks()
+            ->when($scope, $scope)
             ->whereNotNull('embedding')
             ->get()
             ->map(function (DocumentChunk $chunk) use ($questionEmbedding) {

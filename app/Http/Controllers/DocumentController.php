@@ -14,12 +14,18 @@ use Inertia\Response as InertiaResponse;
 class DocumentController extends Controller
 {
     /**
-     * List uploaded documents with their processing status.
+     * List uploaded documents with their processing status, page count and
+     * chunk counts (visual chunks are the ones read from page images).
      */
     public function index(): InertiaResponse
     {
         return Inertia::render('Documents/Index', [
-            'documents' => Document::latest()->get(),
+            'documents' => Document::latest()
+                ->withCount([
+                    'chunks',
+                    'chunks as visual_chunks_count' => fn ($query) => $query->where('chunk_type', 'visual'),
+                ])
+                ->get(),
         ]);
     }
 
